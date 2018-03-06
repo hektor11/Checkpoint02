@@ -1,0 +1,7 @@
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\bin\Debug\Checkpoint02.exe.config
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\bin\Debug\Checkpoint02.exe
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\bin\Debug\Checkpoint02.pdb
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\obj\Debug\Checkpoint02.csprojResolveAssemblyReference.cache
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\obj\Debug\Checkpoint02.csproj.CoreCompileInputs.cache
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\obj\Debug\Checkpoint02.exe
+c:\users\owner\source\repos\Checkpoint02\Checkpoint02\obj\Debug\Checkpoint02.pdb
