@@ -45,6 +45,23 @@ namespace Checkpoint02
             
             return userOption;
         }
+
+        static void PrintMenuItems(List<MenuItem> MenuItems)
+        {
+            foreach (MenuItem item in MenuItems)
+            {
+                Console.WriteLine("Item id {0} is a {1} and costs ${2}", item.ID, item.Name, item.Price);
+            }
+            Console.WriteLine();
+        }
+
+        static void PrintOrderItems(List<MenuItem> OrderList)
+        {
+            for (int index = 0; index < OrderList.Count; index++)
+            {
+                Console.WriteLine("Item of ID {0}: {1}", index, OrderList[index].Name);
+            }
+        }
  
         static void Main(string[] args)
         {
@@ -67,7 +84,7 @@ namespace Checkpoint02
             string receiptOption;
             //Create an order Object to store the user selection
             Order order = new Order(menu.OrderId);
-            menu.printMenu();
+            PrintMenuItems(menu.MenuItems);
             while (orderAgain)
             {
                 while (!orderComplete)
@@ -86,7 +103,7 @@ namespace Checkpoint02
                         case "a":
                             Console.Clear();
                             //Print out the menu so the user can add more items to their order
-                            menu.printMenu();
+                            PrintMenuItems(menu.MenuItems);
                             //Begin validating if userInput is valid in order to add menuItem to the orderList
                             userInput = 0;
                             while (userInput < 1 || userInput > menu.MenuItems.Count())
@@ -100,7 +117,7 @@ namespace Checkpoint02
                             order.AddToOrder(menu.MenuItems[userInput - 1]);
                             Console.WriteLine("---------------------------------------------------------------------------------");
                             Console.WriteLine("Your order currently contains:");
-                            order.PrintOrderItems();
+                            PrintOrderItems(order.OrderList);
                             Console.WriteLine("Your subtotal is: ${0}", Math.Round(Convert.ToDecimal(order.SubTotal), 2));
                             break;
 
@@ -111,7 +128,7 @@ namespace Checkpoint02
                             {
                                 Console.Clear();
                                 Console.WriteLine("Your order currently contains:");
-                                order.PrintOrderItems();
+                                PrintOrderItems(order.OrderList);
                                 Console.WriteLine("Your subtotal is: ${0}", Math.Round(Convert.ToDecimal(order.SubTotal), 2));
                                 Console.WriteLine("Please enter the cart Item ID of the item you would like to remove");
                                 itemToRemoveString = Console.ReadLine();
@@ -121,7 +138,7 @@ namespace Checkpoint02
                                 {
                                     Console.Clear();
                                     Console.WriteLine("Invalid cart item id. Please enter a valid id from below");
-                                    order.PrintOrderItems();
+                                    PrintOrderItems(order.OrderList);
                                     itemToRemoveString = Console.ReadLine();
                                     int.TryParse(itemToRemoveString, out itemToRemove);
                                 }
@@ -129,10 +146,11 @@ namespace Checkpoint02
                                 {
                                     Console.WriteLine("Item was successfully removed from your order");
                                 }
-                                order.PrintOrderItems();
+                                Console.WriteLine("Your order now contains:");
+                                PrintOrderItems(order.OrderList);
                                 Console.WriteLine("Your subtotal is: ${0}", Math.Round(Convert.ToDecimal(order.SubTotal), 2));
                                 Console.WriteLine();
-                                menu.printMenu();
+
                             }
 
                             //The order is empty so inform the user and break to ask for another option

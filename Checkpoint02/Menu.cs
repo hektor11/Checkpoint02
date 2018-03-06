@@ -35,15 +35,7 @@ namespace Checkpoint02
                 
             }
         }
-        // Method to print out the items in the Menu with their metadata
-        public void printMenu()
-        {
-            foreach (MenuItem item in MenuItems)
-            {
-                Console.WriteLine("Item id {0} is a {1} and costs ${2}", item.ID, item.Name, item.Price);
-            }
-            Console.WriteLine();
-        }
+
         // This method will update the orderId that will be assigned to the next Order
         public void UpdateOrderId()
         {

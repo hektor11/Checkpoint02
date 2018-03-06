@@ -21,29 +21,26 @@ namespace Checkpoint02
         {
             //Append the orderId to the path in order to create the file in that location with the orderID as a name
             string receiptPath = ReceiptsPath + "\\" + CustomerOrder.Id + ".txt";
-            //Create the file if it does not already exist
-            //if (!File.Exists(receiptPath))
-            //{
-                FileStream fs = new FileStream(receiptPath, FileMode.Create, FileAccess.Write);
-                if (fs.CanWrite)
+            //Create the file and write the order details to it
+            FileStream fs = new FileStream(receiptPath, FileMode.Create, FileAccess.Write);
+            if (fs.CanWrite)
+            {
+                StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine("ID: {0}", CustomerOrder.Id);
+                sw.WriteLine("---------------------------");
+                sw.WriteLine("{0}", CustomerOrder.TimeOrdered.ToLongDateString());
+                sw.WriteLine("---------------------------");
+                foreach (var orderItem in CustomerOrder.OrderList)
                 {
-                    StreamWriter sw = new StreamWriter(fs);
-                    sw.WriteLine("ID: {0}", CustomerOrder.Id);
-                    sw.WriteLine("---------------------------");
-                    sw.WriteLine("{0}", CustomerOrder.TimeOrdered.ToLongDateString());
-                    sw.WriteLine("---------------------------");
-                    foreach (var orderItem in CustomerOrder.OrderList)
-                    {
-                        sw.WriteLine("{0}           $ {1}", orderItem.Name, Math.Round(Convert.ToDecimal(orderItem.Price), 2));
-                    }
-                    sw.WriteLine("---------------------------");
-                    sw.WriteLine("Subtotal          $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.SubTotal), 2));
-                    sw.WriteLine("TAX               $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.Tax), 2));
-                    sw.WriteLine("Total             $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.Total), 2));
-                    sw.Flush();
-                    sw.Close();
+                    sw.WriteLine("{0}           $ {1}", orderItem.Name, Math.Round(Convert.ToDecimal(orderItem.Price), 2));
                 }
-            //}
+                sw.WriteLine("---------------------------");
+                sw.WriteLine("Subtotal          $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.SubTotal), 2));
+                sw.WriteLine("TAX               $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.Tax), 2));
+                sw.WriteLine("Total             $ {0}", Math.Round(Convert.ToDecimal(CustomerOrder.Total), 2));
+                sw.Flush();
+                sw.Close();
+            }
         }
     }
 }

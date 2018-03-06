@@ -13,6 +13,7 @@ namespace Checkpoint02
         //The order will contain an OrderList which will be used to keep track of the menuItems
         //SubTotal, Tax and total properties will be used to provide the user with the order total
         //TimeOrdered will keep track of the time the order was placed
+        //isEmpty denotes if the orderList is empty
         public int Id {get; private set;}
         public List<MenuItem> OrderList { get; set; }
         public double SubTotal { get; private set; } = 0;
@@ -52,7 +53,6 @@ namespace Checkpoint02
             //remove item from OrderList
             else
             {
-
                 SubTotal -= OrderList[index].Price;
                 OrderList.RemoveAt(index);
                 //Check if the list is now empty
@@ -62,8 +62,6 @@ namespace Checkpoint02
                     isEmpty = true;
                 }
                 return true;
-
-                
             }
 
         }
@@ -81,13 +79,5 @@ namespace Checkpoint02
             Total = SubTotal + Tax;
         }
 
-        // This method will list out the menuItems in the OrderList after a MenuItem is added
-        public void PrintOrderItems()
-        {
-            for (int index = 0; index < OrderList.Count; index++)
-            {
-                Console.WriteLine("Item of ID {0}: {1}", index, OrderList[index].Name);
-            }
-        }
     }
 }
